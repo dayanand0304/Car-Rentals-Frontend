@@ -7,11 +7,13 @@ import './index.css'
 
 import { router } from './routes'
 import { queryClient } from './api/queryClient'
+import { Toaster } from "@/components/ui/sonner";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
+      <Toaster />
     </QueryClientProvider>
   </React.StrictMode>,
 )

@@ -20,7 +20,7 @@ import {
   type LoginSchemaType,
 } from "../schemas/auth.schema";
 
-import { login } from "../services/auth.service";
+import { useLoginMutation } from "../hooks/use-auth-mutations";
 import { useAuthStore } from "../store/auth.store";
 
 const LoginForm = () => {
@@ -37,18 +37,22 @@ const LoginForm = () => {
     },
   });
 
-  const onSubmit = async (values: LoginSchemaType) => {
-    try {
-      const response = await login(values);
-   
+  const loginMutation = useLoginMutation();
 
-      setAuth(response.token, response.user);
+  const onSubmit = async (
+  values: LoginSchemaType
+) => {
+  try {
+    const response =
+      await loginMutation.mutateAsync(values);
 
-      navigate("/dashboard");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    setAuth(response.token, response.user);
+
+    navigate("/dashboard");
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   return (
     <Card>
@@ -101,8 +105,11 @@ const LoginForm = () => {
             <Button
               type="submit"
               className="w-full"
+              disabled={loginMutation.isPending}
             >
-              Login
+              {loginMutation.isPending
+              ? "Logging in..."
+              : "Login"}
             </Button>
           </form>
         </Form>
