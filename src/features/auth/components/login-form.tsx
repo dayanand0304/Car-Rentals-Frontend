@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -12,7 +14,9 @@ import {
 } from "@/components/ui/form";
 
 import { Input } from "@/components/ui/input";
+
 import { Button } from "@/components/ui/button";
+
 import { Card, CardContent } from "@/components/ui/card";
 
 import {
@@ -21,18 +25,21 @@ import {
 } from "../schemas/auth.schema";
 
 import { useLoginMutation } from "../hooks/use-auth-mutations";
+
 import { useAuthStore } from "../store/auth.store";
 
 const LoginForm = () => {
   const navigate = useNavigate();
 
-  const setAuth = useAuthStore((state) => state.setAuth);
+  const setAuth = useAuthStore(
+    (state) => state.setAuth
+  );
 
   const form = useForm<LoginSchemaType>({
     resolver: zodResolver(loginSchema),
 
     defaultValues: {
-      email: "",
+      customerEmail: "",
       password: "",
     },
   });
@@ -40,19 +47,37 @@ const LoginForm = () => {
   const loginMutation = useLoginMutation();
 
   const onSubmit = async (
-  values: LoginSchemaType
-) => {
-  try {
-    const response =
-      await loginMutation.mutateAsync(values);
+    values: LoginSchemaType
+  ) => {
+    console.log("FORM SUBMITTED");
 
-    setAuth(response.token, response.user);
+    console.log(values);
 
-    navigate("/dashboard");
-  } catch (error) {
-    console.error(error);
-  }
-};
+    try {
+      console.log("BEFORE API");
+
+      const response =
+        await loginMutation.mutateAsync(values);
+
+      console.log("AFTER API");
+
+      console.log(response);
+
+      setAuth(response.token, {
+        id: 1,
+        customerName: "Customer Name",
+        customerEmail: values.customerEmail,
+        role: "CUSTOMER",
+      });
+
+      navigate("/dashboard");
+
+    } catch (error) {
+      console.error("LOGIN ERROR");
+
+      console.error(error);
+    }
+  };
 
   return (
     <Card>
@@ -64,7 +89,7 @@ const LoginForm = () => {
           >
             <FormField
               control={form.control}
-              name="email"
+              name="customerEmail"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email</FormLabel>
@@ -108,8 +133,8 @@ const LoginForm = () => {
               disabled={loginMutation.isPending}
             >
               {loginMutation.isPending
-              ? "Logging in..."
-              : "Login"}
+                ? "Logging in..."
+                : "Login"}
             </Button>
           </form>
         </Form>

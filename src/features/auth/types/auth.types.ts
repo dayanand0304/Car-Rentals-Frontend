@@ -1,18 +1,18 @@
 export interface User {
   id: number;
-  name: string;
-  email: string;
+  customerName: string;
+  customerEmail: string;
   role: string;
 }
 
 export interface LoginRequest {
-  email: string;
+  customerEmail: string;
   password: string;
 }
 
 export interface RegisterRequest {
-  name: string;
-  email: string;
+  customerName: string;
+  customerEmail: string;
   password: string;
 }
 

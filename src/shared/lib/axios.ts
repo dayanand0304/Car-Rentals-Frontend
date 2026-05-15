@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "sonner";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 
 const axiosInstance = axios.create({
@@ -8,17 +9,27 @@ const axiosInstance = axios.create({
   },
 });
 
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const token = useAuthStore.getState().token;
+console.log("API URL:", import.meta.env.VITE_API_BASE_URL);
 
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+axiosInstance.interceptors.response.use(
+  (response) => response,
+
+  (error) => {
+    if (error.response?.status === 401) {
+      const logout =
+        useAuthStore.getState().logout;
+
+      logout();
+
+      toast.error(
+        "Session expired. Please login again."
+      );
+
+      window.location.href = "/login";
     }
 
-    return config;
-  },
-  (error) => Promise.reject(error)
+    return Promise.reject(error);
+  }
 );
 
 export default axiosInstance;

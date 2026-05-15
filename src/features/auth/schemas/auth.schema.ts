@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const loginSchema = z.object({
-  email: z
+  customerEmail: z
     .string()
     .email("Invalid email address"),
 
@@ -11,11 +11,11 @@ export const loginSchema = z.object({
 });
 
 export const registerSchema = z.object({
-  name: z
+  customerName: z
     .string()
     .min(3, "Name must be at least 3 characters"),
 
-  email: z
+  customerEmail: z
     .string()
     .email("Invalid email address"),
 
