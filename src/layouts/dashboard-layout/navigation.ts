@@ -1,3 +1,5 @@
+import { type NavigationItem } from "@/types/navigation";
+
 import {
   LayoutDashboard,
   Car,
@@ -5,7 +7,7 @@ import {
   FileText,
 } from "lucide-react";
 
-export const navigation = [
+export const navigation: NavigationItem[] = [
   {
     title: "Dashboard",
     href: "/dashboard",

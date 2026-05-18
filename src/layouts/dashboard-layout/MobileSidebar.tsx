@@ -11,7 +11,10 @@ import { Button } from "@/components/ui/button";
 
 import { navigation } from "./navigation";
 
+import { useAuthStore } from "@/features/auth/store/auth.store";
+
 const MobileSidebar = () => {
+  const { user } = useAuthStore();
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -35,7 +38,10 @@ const MobileSidebar = () => {
         </div>
 
         <nav className="space-y-2 p-4">
-          {navigation.map((item) => {
+          {navigation
+            .filter((item) =>
+            item.roles.includes(user?.role || "")
+          ).map((item) => {
             const Icon = item.icon;
 
             return (
@@ -49,7 +55,7 @@ const MobileSidebar = () => {
                   transition-colors
                   ${
                     isActive
-                      ? "bg-primary text-primary-foreground"
+                      ? "bg-primary text-primary-foreground shadow-sm"
                       : "hover:bg-muted"
                   }
                 `

@@ -2,7 +2,7 @@
 
 const DashboardPage = () => {
   return (
-    <div className="space-y-4">
+    <div className="mx-auto max-w-7xl space-y-4">
       <h1 className="text-3xl font-bold">
         Dashboard
       </h1>
