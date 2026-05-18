@@ -31,11 +31,15 @@ const MobileSidebar = () => {
         side="left"
         className="w-64 p-0"
       >
-        <div className="border-b p-6">
-          <h2 className="text-xl font-bold">
-            Car Rentals
-          </h2>
-        </div>
+      <div>
+        <h2 className="text-xl font-bold">
+          Car Rentals
+        </h2>
+
+        <p className="text-sm text-muted-foreground">
+          Management Platform
+        </p>
+      </div>
 
         <nav className="space-y-2 p-4">
           {navigation

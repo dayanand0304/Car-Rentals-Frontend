@@ -17,10 +17,14 @@ const Sidebar = () => {
         bg-background
       "
     >
-      <div className="border-b p-6">
+      <div>
         <h2 className="text-xl font-bold">
           Car Rentals
         </h2>
+
+        <p className="text-sm text-muted-foreground">
+          Management Platform
+        </p>
       </div>
 
       <nav className="flex-1 space-y-2 p-4">
