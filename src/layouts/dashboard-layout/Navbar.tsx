@@ -25,7 +25,7 @@ const Navbar = () => {
       className="
         flex h-16 items-center
         justify-between
-        border-b
+        border-b bg-background
         px-6
       "
     >

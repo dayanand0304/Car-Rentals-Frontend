@@ -13,7 +13,7 @@ const DashboardLayout = () => {
       <div className="flex flex-1 flex-col">
         <Navbar />
 
-        <main className="flex-1 overflow-auto p-6">
+        <main className="flex-1 overflow-auto bg-muted/30 p-4 md:p-6">
           <Outlet />
         </main>
       </div>
