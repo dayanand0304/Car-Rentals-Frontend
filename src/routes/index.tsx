@@ -6,9 +6,9 @@ import RegisterPage from "@/features/auth/pages/register-page";
 
 import ProtectedRoute from "@/shared/components/protected-route";
 
-import DashboardLayout from "@/shared/layouts/dashboard-layout";
+import { DashboardLayout } from "@/layouts/dashboard-layout";
 
-import DashboardPage from "@/features/dashboard/pages/dashboard-page";
+import DashboardPage from "@/pages/dashboard/DashboardPage";
 
 export const router = createBrowserRouter([
   {
